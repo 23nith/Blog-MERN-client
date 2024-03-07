@@ -9,7 +9,8 @@ const EditPost = () => {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('Uncategorized')
   const [description, setDescription] = useState('')
-  const [thumbnail, setThumbnail] = useState('')
+  // const [thumbnail, setThumbnail] = useState('')
+  const [file, setFile] = useState()
   const [error, setError] = useState('')
 
   const navigate = useNavigate()
@@ -63,16 +64,22 @@ const EditPost = () => {
     postData.set('title', title)
     postData.set('category', category)
     postData.set('description', description)
-    postData.set('thumbnail', thumbnail)
+    // postData.set('thumbnail', thumbnail)
+    postData.append('thumbnail', file)
 
     try {
-      const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, postData, {withCredentials: true, headers: {Authorization: `Bearer ${token}`}})
+      const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, postData, {withCredentials: true, headers: {Authorization: `Bearer ${token}`,  'Content-Type': 'multipart/form-data' }})
       if(response.status == 200){
         return navigate('/')
       }
     }catch (error){
       setError(error.response.data.message)
     }
+  }
+
+  const fileSelected = event => {
+    const file = event.target.files[0]
+    setFile(file)
   }
 
 
@@ -89,7 +96,8 @@ const EditPost = () => {
             }
           </select>
           <ReactQuill modules={modules} formats={formats} value={description} onChange={setDescription}/>
-          <input type="file" onChange={e => setThumbnail(e.target.files[0])} accept='png, jpg, jpeg'/>
+          {/* <input type="file" onChange={e => setThumbnail(e.target.files[0])} accept='png, jpg, jpeg'/> */}
+          <input type="file" onChange={fileSelected} accept='image/*'/>
           <button type='submit' className='btn primary'>Update</button>
         </form>
       </div>
