@@ -80,7 +80,7 @@ const UserProfile = () => {
         <div className="profile__details">
           <div className="avatar__wrapper">
             <div className="profile__avatar">
-              <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`} alt="" />
+              <img src={`${avatar}`} alt="" />
             </div>
             {/* Form to update avatar */}
             <form action="" className="avatar__form">
