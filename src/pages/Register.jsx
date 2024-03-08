@@ -11,7 +11,7 @@ const Register = () => {
   })
 
   const [error, setError] = useState()
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const changeInputHandler = (e) => {
     setUserData(prevState => {
@@ -28,8 +28,8 @@ const Register = () => {
       console.log(newUser)
       if(!newUser){
         setError("Couldn't register user. Please try again.")
-        navigate('/login')
       }
+      navigate('/login')
     }catch(error){
       setError(error.response.data.message)
     }
