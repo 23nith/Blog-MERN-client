@@ -15,7 +15,7 @@ const Footer = () => {
         <li><Link to="/posts/categories/Weather">Weather</Link></li>
       </ul>
       <div className="footer__copyright">
-        <small>All Rights Reserved &copy; Copyright, EGATOR Tutorials.</small>
+        <small>All Rights Reserved &copy; Copyright.</small>
       </div>
     </footer>
   )
